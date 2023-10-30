@@ -17,7 +17,7 @@ export default async function SomethingPage() {
     // if (!res) return <div>Server Error</div>;
     // return <div>{data}</div>;
     return (
-        <WithHeader title={'ISR 테스트용'}>
+        <WithHeader title="ISR 테스트용">
             <div>서버시간</div>
         </WithHeader>
     );
