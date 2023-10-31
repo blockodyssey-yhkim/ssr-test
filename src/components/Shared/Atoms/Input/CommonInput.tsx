@@ -1,20 +1,22 @@
 import React, { ComponentProps, forwardRef } from 'react';
+
 import cn from 'classnames';
 import { useFormContext } from 'react-hook-form';
 
 type TProps = {
     className?: string;
 } & ComponentProps<'input'>;
-const AuthInput = forwardRef(({ className, ...props }: TProps, _) => {
+const CommonInput = forwardRef(({ className, ...props }: TProps, _) => {
     const { register } = useFormContext();
+
     return (
         <input
+            {...(props.name && { ...register(props.name as string) })}
             {...props}
-            {...register(props.name as string)}
-            className={cn(className, 'h-12 border-zinc-300 border-2 px-4')}
+            className={cn(className, 'h-12 border-zinc-300 border-2 px-4 rounded-2xl')}
         />
     );
 });
-AuthInput.displayName = 'Input';
+CommonInput.displayName = 'CommonInput';
 
-export default AuthInput;
+export default CommonInput;

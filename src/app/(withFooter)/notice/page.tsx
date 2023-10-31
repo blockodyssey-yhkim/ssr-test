@@ -1,9 +1,7 @@
 import React from 'react';
 
-import Link from 'next/link';
-
-import WithHeaderFooter from '@/app/(withHeaderFooter)/layout';
 import List from '@/components/Shared/Molecules/List/List';
+import WithHeader from '@/components/Templates/WithHeader';
 
 export type TNotice = {
     id: number;
@@ -30,8 +28,7 @@ export default async function NoticePage() {
     const data: TResponse = await res.json();
 
     return (
-        <>
-            {/* <CommonHeader action={action} title={title} isBack={isBack} /> */}
+        <WithHeader title="공지사항" isBack>
             <List className="gap-4 mt-4 px-4">
                 {data.noticesList.map(({ id, title }) => (
                     <li key={id} className="bg-zinc-100 h-16 rounded-full px-4 flex items-center">
@@ -39,6 +36,6 @@ export default async function NoticePage() {
                     </li>
                 ))}
             </List>
-        </>
+        </WithHeader>
     );
 }

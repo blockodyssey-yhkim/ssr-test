@@ -1,6 +1,10 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
+type TReturnData = {
+    accessToken: string;
+    refreshToken: string;
+};
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialProvider({
@@ -8,20 +12,20 @@ export const authOptions: NextAuthOptions = {
             type: 'credentials',
             credentials: {
                 accessToken: { label: 'accessToken', type: 'accessToken', required: false },
-                refreshToken: { label: 'refreshToken', type: 'refreshToken', required: false }
+                refreshToken: { label: 'refreshToken', type: 'refreshToken', required: false },
             },
 
             async authorize(credentials) {
                 if (credentials) {
-                    const returnData = {
+                    const returnData: TReturnData = {
                         accessToken: credentials?.accessToken,
-                        refreshToken: credentials?.refreshToken
+                        refreshToken: credentials?.refreshToken,
                     };
                     return returnData as any;
                 }
                 return null;
-            }
-        })
+            },
+        }),
     ],
     callbacks: {
         async jwt({ token, user, trigger, session }) {
@@ -34,11 +38,11 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             session.user = token as any;
             return session;
-        }
+        },
     },
     pages: {
-        signIn: '/login'
-    }
+        signIn: '/login',
+    },
 };
 
 const handler = NextAuth(authOptions);

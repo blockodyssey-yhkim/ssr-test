@@ -1,14 +1,15 @@
-import ExternalApi from '@/libraries/axios/externalApi';
 import { NextResponse } from 'next/server';
+
+import PrivateApi from '@/libraries/axios/privateApi';
 
 const POST = async (request: Request) => {
     const req = await request.json();
-    const responseData = await ExternalApi({
+    const responseData = await PrivateApi({
         endpoint: '/members/signIn',
         method: 'POST',
         body: {
-            ...req
-        }
+            ...req,
+        },
     });
     switch (responseData.status) {
         case 201: {

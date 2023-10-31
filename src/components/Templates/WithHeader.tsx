@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react';
-import { NodeChildren } from '@/libraries/types';
+
 import CommonHeader from '@/components/Shared/Molecules/Header/CommonHeader';
+
+import { NodeChildren } from '../../types';
+
 type TWithHeaderProps = {
     title: string;
     action?: ReactElement;
